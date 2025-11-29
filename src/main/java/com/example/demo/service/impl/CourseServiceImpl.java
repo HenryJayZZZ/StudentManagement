@@ -24,7 +24,6 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void save(Course course) {
         if (courseMapper.findById(course.getId()) != null) {
-            // 课程已存在，不插入
             return;
         }
         courseMapper.insert(course);
@@ -33,7 +32,6 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void update(Course course) {
         if (courseMapper.findById(course.getId()) == null) {
-            // 课程不存在，不更新
             return;
         }
         courseMapper.update(course);
@@ -42,7 +40,6 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void delete(Integer id) {
         if (courseMapper.findById(id) == null) {
-            // 课程不存在，不删除
             return;
         }
         courseMapper.delete(id);
