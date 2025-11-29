@@ -1,4 +1,3 @@
-// SCServiceImpl.java
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.SC;
@@ -26,16 +25,28 @@ public class SCServiceImpl implements SCService {
 
     @Override
     public void save(SC sc) {
+        if (scMapper.findById(sc.getId()) != null) {
+            // 选课记录已存在，不插入
+            return;
+        }
         scMapper.insert(sc);
     }
 
     @Override
     public void update(SC sc) {
+        if (scMapper.findById(sc.getId()) == null) {
+            // 选课记录不存在，不更新
+            return;
+        }
         scMapper.update(sc);
     }
 
     @Override
     public void delete(Integer id) {
+        if (scMapper.findById(id) == null) {
+            // 选课记录不存在，不删除
+            return;
+        }
         scMapper.delete(id);
     }
 }
